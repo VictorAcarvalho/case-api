@@ -1,5 +1,5 @@
 const mongoose = require('../db');
-const card = require('../models/cardModel');
+const bcrypt = require('bcryptjs');
 const userSchema = mongoose.Schema({
     name:{
         type:String,
@@ -11,7 +11,8 @@ const userSchema = mongoose.Schema({
     },
     password:{
         type:String,
-        required:true
+        required:true,
+        select:false
     },
     cnpj:{
         type:Number,
@@ -26,17 +27,26 @@ const userSchema = mongoose.Schema({
             type:String,
             required:true
         },
-        neighood:{
+        neighborhood:{
             type:String,
             required:true
+        },
+        city:{
+          type:String,
+          required:true
         },
         state:{
             type:String,
             required:true
         }
     },
-    
+
 },{timestamps:true})
+userSchema.pre('save',async function(next){
+  const hash =bcrypt.hash(this.password,10);
+  this.password= hash;
+  next()
+});
 
 const user = mongoose.model('User',userSchema);
 module.exports = user;
