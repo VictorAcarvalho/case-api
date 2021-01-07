@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema({
         type:String,
         required:true,
         select:false
+
     },
     cnpj:{
         type:Number,
