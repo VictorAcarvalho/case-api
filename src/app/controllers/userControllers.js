@@ -1,8 +1,10 @@
 const userModel = require('../../config/models/userModel');
+const cardModel = require('../../config/models/cardModel');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 class UserControllers{
-
+    //cadastra usuário
     async store(req,res){
         const {email} = req.body
         const user = await userModel.findOne({email});
@@ -13,11 +15,8 @@ class UserControllers{
         return res.status(401).json({msg:"Email já cadastrado"});
     };
 
-     async show(req,res){
-       const user = await userModel.find();
-       return res.status(200).json({user});
-     }
 
+    //Autentifica o login do usuário
     async auth(req,res){
       const {email,password} = req.body;
       const user = await userModel.findOne({email}).select('password');
@@ -28,9 +27,22 @@ class UserControllers{
       if(!password){
         return res.status(401).json({msg:"Email ou senha inválida"});
       }
-      return res.status(200).json({msg:"Usuário logado com sucesso"});
+      const { _id: id } = user;
 
-    }
+      const token = jwt.sign({ id }, process.env.JWT_KEY, {
+        expiresIn: '1d',
+      });
+      return res.status(200).json({token});
+   };
+
+   //Cadastra um cartão
+
+   async storeCard(req,res){
+    const userCard = await cardModel.create(req.body);
+    return res.status(201).json({userCard});
+  }
+
+
 
 
 

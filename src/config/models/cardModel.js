@@ -19,6 +19,7 @@ const CardSchema = mongoose.Schema({
         required:true,
         select:false
     }
+
 });
 
 const userCard = mongoose.model('userCard',CardSchema);

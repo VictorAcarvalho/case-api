@@ -3,5 +3,11 @@ const routes = require('express').Router();
 
     routes.post('/user',userControllers.store);
     routes.post('/login',userControllers.auth);
-    routes.get('/users',userControllers.show);
+    //JWT
+    routes.post('/card',cardControllers.storeCard);
+
+
+
+
+
 module.exports = routes;
