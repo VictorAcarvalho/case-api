@@ -1,5 +1,6 @@
-const mongoose = require('../db');
+const mongoose = require('../../config/db');
 const bcrypt = require('bcryptjs');
+const { Schema } = require('../../config/db');
 const userSchema = mongoose.Schema({
     name:{
         type:String,
@@ -41,6 +42,11 @@ const userSchema = mongoose.Schema({
             required:true
         }
     },
+    cards:[{
+      type: Schema.Types.ObjectId,
+      ref:"Cards",
+      required:true
+    }],
 
 },{timestamps:true})
 userSchema.pre('save',async function(next){

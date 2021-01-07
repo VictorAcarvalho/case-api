@@ -1,5 +1,5 @@
-const userModel = require('../../config/models/userModel');
-const cardModel = require('../../config/models/cardModel');
+const userModel = require('../models/userModel');
+const cardModel = require('../models/cardModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 

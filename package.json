@@ -20,7 +20,9 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.6",
     "prettier-eslint-plugin": "^1.1.4",
-    "require-dir": "^1.2.0"
+    "require-dir": "^1.2.0",
+    "util": "^0.12.3",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "eslint": "^7.17.0",
