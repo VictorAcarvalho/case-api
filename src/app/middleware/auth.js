@@ -1,5 +1,6 @@
 const {promisify} = require('util');
 const jwt = require('jsonwebtoken');
+const logger = require('../../helper/logger');
 
 module.exports = async (req,res,next)=>{
     const authHeader = req.headers.authorization;
@@ -9,12 +10,12 @@ module.exports = async (req,res,next)=>{
     };
 
     const jwtParts = authHeader.split(' ');
-    if(!jwtParts.length===2){
+    if(!jwtParts.length === 2){
         return res.status(401).json({error:'Token inválido'});
     };
 
     const [scheme,token] = jwtParts;
-    if(scheme!==Bearer){
+    if(scheme!== 'Bearer'){
         return res.status(401).json({error:'Prefixo do token incorreto'});
 
     };

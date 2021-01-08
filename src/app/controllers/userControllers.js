@@ -38,12 +38,12 @@ class UserControllers{
    //Funcionalidades cartão
 
    //Cadastra um cartão
-   async storeCard(req,res){
+    async storeCard(req,res){
     const userCard = await cardModel.create(req.body);
     return res.status(201).json({userCard});
   };
   //Lista todos os cartões do usuário
-  async list(req,res){
+    async list(req,res){
     const userCard = await cardModel.find();
     return res.status(200).json({userCard});
   }

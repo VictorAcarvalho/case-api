@@ -1,5 +1,4 @@
 const userControllers = require('./app/controllers/userControllers');
-const cardControllers = require('./app/controllers/userControllers');
 const JWT = require('./app/middleware/auth');
 const routes = require('express').Router();
     //cadastra usuário
@@ -9,7 +8,9 @@ const routes = require('express').Router();
     //json web token
     routes.use(JWT);
     //cadastrar cartão
-    routes.post('/card',cardControllers.storeCard);
+    routes.post('/card',userControllers.storeCard);
+    //Lista os cartões
+    routes.get('/card',userControllers.list);
 
 
 module.exports = routes;

@@ -23,11 +23,8 @@ const CardSchema = mongoose.Schema({
     userID:{
       type:Schema.Types.ObjectId,
       ref:'User',
-      required:true
+      required:true,
     },
-    delete:{
-      type:false
-    }
 },{timestamps:true});
 
 const userCard = mongoose.model('Cards',CardSchema);
