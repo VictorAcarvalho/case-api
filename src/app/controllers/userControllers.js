@@ -29,14 +29,13 @@ class UserControllers{
       }
       const { _id: id } = user;
 
-      const token = jwt.sign({ id }, process.env.JWT_KEY, {
+      const token = jwt.sign({ id }, process.env.TOKEN_KEY, {
         expiresIn: '1d',
       });
       return res.status(200).json({token});
    };
 
    //Cadastra um cartão
-
    async storeCard(req,res){
     const userCard = await cardModel.create(req.body);
     return res.status(201).json({userCard});

@@ -43,12 +43,11 @@ const userSchema = mongoose.Schema({
         }
     },
     cards:[{
-      type: Schema.Types.ObjectId,
-      ref:"Cards",
-      required:true
-    }],
+      type:Schema.Types.ObjectId,
+      ref:'Cards'
+    }]
 
-},{timestamps:true})
+    },{timestamps:true})
 userSchema.pre('save',async function(next){
   const hash =bcrypt.hash(this.password,10);
   this.password= hash;
