@@ -20,11 +20,16 @@ const CardSchema = mongoose.Schema({
       type:String,
         required:true
     },
-    userID:{
-      type:Schema.Types.ObjectId,
+    user:{
+      type:mongoose.Schema.Types.ObjectId,
       ref:'User',
       required:true,
     },
+    active:{
+      type:Boolean,
+      required:true,
+      default:false
+    }
 },{timestamps:true});
 
 const userCard = mongoose.model('Cards',CardSchema);

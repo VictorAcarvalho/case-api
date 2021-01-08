@@ -23,8 +23,8 @@ class UserControllers{
       if(!user){
         return res.status(401).json({msg:"Email ou senha inválida"});
       }
-      await bcrypt.compare(password, user.password);
-      if(!password){
+
+      if(!await bcrypt.compare(password, user.password)){
         return res.status(401).json({msg:"Email ou senha inválida"});
       }
       const { _id: id } = user;
@@ -44,8 +44,7 @@ class UserControllers{
   };
   //Lista todos os cartões do usuário
     async list(req,res){
-    const userCard = await cardModel.find();
-    return res.status(200).json({userCard});
+    return res.status(200).json({});
   }
 
 

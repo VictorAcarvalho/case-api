@@ -43,7 +43,7 @@ const userSchema = mongoose.Schema({
         }
     },
     cards:[{
-      type:Schema.Types.ObjectId,
+      type:mongoose.Schema.Types.ObjectId,
       ref:'Cards'
     }]
 
