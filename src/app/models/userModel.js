@@ -9,14 +9,18 @@ const userSchema = mongoose.Schema(
    },
    email:{
     type:String,
-    required: true
-
+    required: true,
+    unique:true
    },
    password:{
     type:String,
     required: true,
     select:false
    },
+   Usercards:[{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'Cards'
+   }]
 
 },{timestamps:true});
 
@@ -27,4 +31,4 @@ userSchema.pre('save',async function(next){
 });
 
 const user = mongoose.model('User',userSchema);
-module.exports= user
+module.exports= user;
