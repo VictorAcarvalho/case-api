@@ -28,7 +28,7 @@ module.exports = async (req, res, next) => {
       process.env.TOKEN_KEY
     );
     logger.info(tokenDecoded.id);
-    req.id = decode.id
+    req.id =tokenDecoded.id
     return next();
   } catch (e) {
     logger.error(e);

@@ -2,7 +2,7 @@ const userModel = require('../models/userModel');
 const cardModel = require('../models/cardModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const auth = require('../middleware/auth');
 class UserControllers{
     //cadastra usuário
     async store(req,res){
@@ -39,13 +39,23 @@ class UserControllers{
 
    //Cadastra um cartão
     async storeCard(req,res){
-    const userCard = await cardModel.create(req.body);
-    return res.status(201).json({userCard});
+    try {
+        const userCard = await cardModel.create(req.body);
+        return res.status(201).json({userCard});
+    } catch (error) {
+
+      return  res.status(400).json({error:'Error ao criar um novo cartão!'})
+    }
   };
   //Lista todos os cartões do usuário
     async list(req,res){
-    return res.status(200).json({});
-  }
+      try {
+        const userCards = await cardModel.find();
+        return res.status(200).json({userCards});
+      } catch (error) {
+        return  res.status(400).json({error:'Error ao listar os cartões!'});
+      }
+  };
 
 
 
