@@ -2,11 +2,11 @@ const userModel = require('../models/userModel');
 const cardModel = require('../models/cardModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const auth = require('../middleware/auth');
-const user = require('../models/userModel');
 const logger = require('../../helper/logger');
 class UserControllers{
-    //cadastra usuário
+
+
+  //cadastra usuário
     async store(req,res){
         const {email} = req.body
         const user = await userModel.findOne({email});
@@ -34,6 +34,8 @@ class UserControllers{
       const token = jwt.sign({ id }, process.env.TOKEN_KEY, {
         expiresIn: '1d',
       });
+
+      logger.info(id);
       return res.status(200).json({token});
    };
 
@@ -42,18 +44,19 @@ class UserControllers{
    //Cadastra um cartão
     async storeCard(req,res){
     try {
-        const userCard = await cardModel.create({...req.body,user:req.id});
+        req.body.user= req.id
+        const userCard = await cardModel.create(req.body);
 
         return res.status(201).json({userCard});
     } catch (error) {
       logger.info(error);
       return  res.status(400).json({error:'Error ao criar um novo cartão!'})
-    }push
+    }
   };
   //Lista todos os cartões do usuário
     async list(req,res){
       try {
-        const userCards = await cardModel.find().populate('users');
+        const userCards = await cardModel.find({user:req.id}).populate('users');
         return res.status(200).json({userCards});
       } catch (error) {
         return  res.status(400).json({error:'Error ao listar os cartões!'});

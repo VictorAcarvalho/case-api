@@ -16,11 +16,8 @@ const userSchema = mongoose.Schema(
     type:String,
     required: true,
     select:false
-   },
-   Usercards:[{
-      type:mongoose.Schema.Types.ObjectId,
-      ref:'Cards'
-   }]
+   }
+
 
 },{timestamps:true});
 
