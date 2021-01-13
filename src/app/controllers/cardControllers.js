@@ -1,5 +1,6 @@
 const cardModel = require('../models/cardModel');
-
+const logger = require('../../helper/logger');
+const userCard = require('../models/cardModel');
 class CardControllers{
 
    //Cadastra um cartão
@@ -18,13 +19,11 @@ class CardControllers{
 
   //Lista todos os cartões do usuário
     async list(req,res){
-      try {
+
         const userCards = await cardModel.find({user:req.id}).populate('users');
         return res.status(200).json({userCards});
-      } catch (error) {
-        return  res.status(400).json({error:'Error ao listar os cartões!'});
-      }
-  };
+      };
+
 
   // Atualiza dados do cartão
   async update(req,res){

@@ -15,9 +15,15 @@ const operationSchema = mongoose.Schema({
     required: true
   },
   type:{
-    type:Number,
+    type:String,
+    required:true
+  },
+  establishment:{
+    type:String,
     required:true
   }
+
+
 },{timestamps:true});
 
 const operations = mongoose.model('Operations',operationSchema);

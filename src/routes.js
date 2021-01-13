@@ -1,5 +1,6 @@
 const userControllers = require('./app/controllers/userControllers');
 const cardControllers = require('./app/controllers/cardControllers');
+const operationControllers = require('./app/controllers/operationController')
 const JWT = require('./app/middleware/auth');
 const routes = require('express').Router();
     //Funcionalidades Usuário
@@ -20,5 +21,9 @@ const routes = require('express').Router();
     routes.put('/card/:id',cardControllers.update);
     //Soft delete
     routes.put('/card/:id',cardControllers.softDelete);
+
+    //Funcionalidades das transações
+    routes.post('/operations/:card',operationControllers.store);
+
 
 module.exports = routes;
