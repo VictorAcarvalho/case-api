@@ -23,7 +23,13 @@ const routes = require('express').Router();
     routes.put('/card/:id',cardControllers.softDelete);
 
     //Funcionalidades das transações
+
+    //Cria uma nova operação passando o id do cartão como parametro
     routes.post('/operations/:card',operationControllers.store);
+    //Lista as operações do cartão
+    routes.get('/operations/:card',operationControllers.list);
+    //Lista apenas uma operação
+    routes.get('/operations/:id',operationControllers.show);
 
 
 module.exports = routes;

@@ -7,7 +7,7 @@ const operationSchema = mongoose.Schema({
       required:true
   },
   date:{
-    type:Date,
+    type:String,
     required:true
   },
   value:{
