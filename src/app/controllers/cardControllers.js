@@ -26,8 +26,22 @@ class CardControllers{
       }
   };
 
+  // Atualiza dados do cartão
+  async update(req,res){
+    req.body.user= req.id
+    const {id}= req.params
+    const userCards = await cardModel.findByIdAndUpdate(id,req.body,{new:true});
+    return res.status(201).json({userCards});
+  }
 
-
+  //Soft delete
+  async softDelete(req,res){
+    req.body.user=req.id;
+    req.body.active = false;
+    const {id} = req.params
+    const userCards = await cardModel.findByIdAndUpdate(id,req.body);
+    return res.status(200).json({userCards});
+  }
 }
 
 module.exports = new CardControllers();

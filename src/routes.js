@@ -16,6 +16,9 @@ const routes = require('express').Router();
     routes.post('/card',cardControllers.storeCard);
     //Lista os cartões
     routes.get('/card',cardControllers.list);
-
+    //Atualiza o  cartão
+    routes.put('/card/:id',cardControllers.update);
+    //Soft delete
+    routes.put('/card/:id',cardControllers.softDelete);
 
 module.exports = routes;
