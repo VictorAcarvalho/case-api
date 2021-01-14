@@ -11,7 +11,7 @@ const CardSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    date:{
+    expireDate:{
         type:String,
         required:true
     },
@@ -28,7 +28,7 @@ const CardSchema = mongoose.Schema({
     active:{
       type:Boolean,
       required:true,
-      default:false
+      default:true
     }
 },{timestamps:true});
 

@@ -25,7 +25,8 @@
     "prettier-eslint-plugin": "^1.1.4",
     "require-dir": "^1.2.0",
     "util": "^0.12.3",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "youch": "^2.1.1"
   },
   "devDependencies": {
     "eslint": "^7.17.0",
