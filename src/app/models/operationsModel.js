@@ -1,5 +1,5 @@
 const mongoose = require('../../config/db');
-
+const Float = require('mongoose-float').loadType(mongoose);
 const operationSchema = mongoose.Schema({
   card:{
       type:mongoose.Schema.Types.ObjectId,
@@ -11,7 +11,7 @@ const operationSchema = mongoose.Schema({
     required:true
   },
   value:{
-    type:Number,
+    type:Float,
     required: true
   },
   type:{

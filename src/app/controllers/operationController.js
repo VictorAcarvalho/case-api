@@ -15,7 +15,7 @@ async list (req,res){
   const {card} =req.params
   const listOperation = await operationModel.find({card});
   return res.status(200).json({listOperation});
-}
+};
 
 async show (req,res){
   const {id} =req.params

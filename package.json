@@ -19,6 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongoose": "^5.11.11",
+    "mongoose-float": "^1.0.4",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.6",
     "prettier-eslint-plugin": "^1.1.4",
