@@ -1,10 +1,12 @@
-const operationModel = require('../models/operations');
-
+const operationModel = require('../models/operationsModel');
+const {format} = require ('date-fns')
 class OperationControllers {
 
   async store(req,res){
     const {card} =req.params;
     req.body.card = card;
+    req.body.date = format(new Date(),'dd-MM-yyyy-');
+    req.body.hour = format(new Date(), 'HH:mm:ss')
     const createOperation = await operationModel.create(req.body);
     return res.status(201).json({createOperation});
 };
