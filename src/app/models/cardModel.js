@@ -5,9 +5,8 @@ const CardSchema = mongoose.Schema({
     number:{
         type:String,
         required:true,
-
     },
-    bank:{
+    name:{
         type:String,
         required:true
     },
