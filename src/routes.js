@@ -6,6 +6,9 @@ const routes = require('express').Router();
     //Funcionalidades Usuário
     //cadastra usuário
     routes.post('/user',userControllers.store);
+    
+    //buscar usuários
+    routes.get('/user',userControllers.index);
     //autentifica o login do usuário
     routes.post('/login',userControllers.auth);
     //json web token

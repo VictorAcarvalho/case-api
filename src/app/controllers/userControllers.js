@@ -17,6 +17,13 @@ class UserControllers{
         return res.status(401).json({msg:"Email já cadastrado"});
     };
 
+  //buscar usuários
+    async index(req,res){
+        const user = await userModel.find();
+
+        return res.json({ user });
+    };
+
 
     //Autentifica o login do usuário
     async auth(req,res){
