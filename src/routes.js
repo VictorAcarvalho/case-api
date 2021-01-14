@@ -23,7 +23,7 @@ const routes = require('express').Router();
     //Atualiza o  cartão
     routes.put('/card/:id',cardControllers.update);
     //Soft delete
-    routes.put('/card/:id',cardControllers.softDelete);
+    routes.put('/cardDelete/:id',cardControllers.softDelete);
 
     //Funcionalidades das transações
 
