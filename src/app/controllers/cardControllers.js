@@ -1,5 +1,4 @@
 const cardModel = require('../models/cardModel');
-const logger = require('../../helper/logger');
 class CardControllers{
 
 
@@ -7,10 +6,6 @@ class CardControllers{
    //Cadastra um cartão digital
    async storeCard(req,res){
 
-
-        const generatorCard = Math.floor(Math.random()*(10000-1000) + 1000 );
-
-        req.body.number = generatorCard;
         req.body.user= req.id
         const userCard = await cardModel.create(req.body);
 

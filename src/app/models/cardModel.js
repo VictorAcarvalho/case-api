@@ -27,7 +27,11 @@ const CardSchema = mongoose.Schema({
     active:{
       type:Boolean,
       default:true
-    }
+    },
+    cards:[{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'digitalCards'
+    }]
 },{timestamps:true});
 
 
