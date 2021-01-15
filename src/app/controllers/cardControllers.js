@@ -1,11 +1,16 @@
 const cardModel = require('../models/cardModel');
 const logger = require('../../helper/logger');
-const userCard = require('../models/cardModel');
 class CardControllers{
 
-   //Cadastra um cartão
+
+
+   //Cadastra um cartão digital
    async storeCard(req,res){
 
+
+        const generatorCard = Math.floor(Math.random()*(10000-1000) + 1000 );
+
+        req.body.number = generatorCard;
         req.body.user= req.id
         const userCard = await cardModel.create(req.body);
 
@@ -23,9 +28,9 @@ class CardControllers{
 
   // Atualiza dados do cartão
   async update(req,res){
-    req.body.user= req.id
-    const {id}= req.params
-    const userCards = await cardModel.findByIdAndUpdate(id,req.body,{new:true});
+
+    const {number} = req.body;
+    const userCards = await cardModel.findOneAndUpdate(number,req.body,{new:true});
     return res.status(201).json({userCards});
   }
 
@@ -33,8 +38,8 @@ class CardControllers{
   async softDelete(req,res){
     req.body.user=req.id;
     req.body.active = false;
-    const {id} = req.params
-    const userCards = await cardModel.findByIdAndUpdate(id,req.body);
+    const {number} = req.body
+    const userCards = await cardModel.findOneAndUpdate(number,req.body);
     return res.status(200).json({userCards});
   }
 }
