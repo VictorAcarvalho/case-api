@@ -2,7 +2,7 @@ const mongoose = require('../../config/db');
 
 const CardSchema = mongoose.Schema({
     number:{
-        type:Number,
+        type:String,
         unique:true
 
     },

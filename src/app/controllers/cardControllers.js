@@ -1,12 +1,10 @@
 const cardModel = require('../models/cardModel');
-const jwt = require('jsonwebtoken');
 class CardControllers{
 
 
 
    //Cadastra um cartão digital
    async store(req,res){
-    const generatorCard = createCardNumber();
     const {name, expireDate, type,number } = req.body
 
     const cardCreationObject = {
@@ -17,18 +15,23 @@ class CardControllers{
         user: req.id,
 
     }
-      if (cardCreationObject.type == 'digital'){
-        cardCreationObject.number = generatorCard;
+      const generatorCard = Math.floor(Math.random()*(10000-1000)+1000);
+      if (cardCreationObject.type === 'digital'){
+       const {number,expireDate} = await cardModel.findOne({type:'fisico'});
+       cardCreationObject.number= number.substring(0,12)+generatorCard;
+       cardCreationObject.expireDate= expireDate;
       }
-    const digitalCard = await digitalCardModel.create(cardCreationObject);
-    res.status(201).json(JSON.parse(digitalCard));
+
+    const card = await cardModel.create(cardCreationObject);
+    return res.status(201).json({card});
   };
 
 
-  //Lista todos os cartões do usuário
+
+   //Lista todos os cartões do usuário
     async list(req,res){
 
-        const userCards = await cardModel.find({user:req.id,active:true}).populate('users');
+        const userCards = await cardModel.find({user:req.id,isActive:true}).populate('users');
         return res.status(200).json({userCards});
       };
 
@@ -36,8 +39,8 @@ class CardControllers{
   // Atualiza dados do cartão
   async update(req,res){
 
-    const {number} = req.body;
-    const userCards = await cardModel.findOneAndUpdate(number,req.body,{new:true});
+    const {id} = req.params;
+    const userCards = await cardModel.findByIdAndUpdate(id,req.body,{new:true});
     return res.status(201).json({userCards});
   }
 
@@ -50,9 +53,8 @@ class CardControllers{
     return res.status(200).json({userCards});
   };
 
-    createCardNumber= () => {
-    return Math.floor(Math.random()*(10000-1000) + 1000 );
-};
+
+
 
 }
 
