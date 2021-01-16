@@ -3,17 +3,11 @@ const cardControllers = require('./app/controllers/cardControllers');
 const operationControllers = require('./app/controllers/operationController');
 const JWT = require('./app/middleware/auth');
 const routes = require('express').Router();
-    //Endpoints Usuário
+                                //Endpoints Usuário
 
     //cadastra usuário
     routes.post('/user',userControllers.store);
-<<<<<<< HEAD
 
-=======
-    
-    //buscar usuários
-    routes.get('/user',userControllers.index);
->>>>>>> 47372fa20813b95478f14234a2173c8c61e5c4ae
     //autentifica o login do usuário
     routes.post('/login',userControllers.auth);
     //json web token
@@ -25,10 +19,10 @@ const routes = require('express').Router();
     //cadastrar cartão
     routes.post('/card',cardControllers.store);
 
-    //Lista os cartões físicos
+    //Lista os cartões
     routes.get('/card',cardControllers.list);
 
-    //Atualiza o  cartão físico
+    //Atualiza o  cartão
     routes.put('/card',cardControllers.update);
 
     //Soft delete

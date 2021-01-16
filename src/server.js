@@ -2,14 +2,14 @@ require('dotenv').config();
 const express = require('express');
 const Youch = require('youch');
 const logger = require('./helper/logger');
-const router = require('./routes');
 const morgan = require('morgan');
+const routes = require('./routes.js');
 const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(morgan('tiny'));
 app.use(express.json());
-app.use(router);
+app.use(routes);
 app.use(async (error, req, res) => {
   if (error) {
     const errors = await new Youch(error, req).toJSON();
