@@ -8,12 +8,12 @@ class OperationControllers {
     const cardId = await cardModel.findOne({number});
 
     if(!cardId){
-      return res.status(401).json({error:'Cartão '})
-    }
+      return res.status(401).json({error:'Cartão não encontrado '});
+    };
     const {_id:id} = cardId;
     req.body.card = id;
     req.body.date = format(new Date(),'dd-MM-yyyy');
-    req.body.hour = format(new Date(), 'HH:mm:ss')
+    const hour =  format(req.body.hour, 'HH:mm:ss');
     const createOperation = await operationModel.create(req.body);
     return res.status(201).json({createOperation});
 };

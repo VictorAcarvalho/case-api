@@ -1,17 +1,27 @@
 const cardModel = require('../models/cardModel');
+const jwt = require('jsonwebtoken');
 class CardControllers{
 
 
 
    //Cadastra um cartão digital
-   async storeCard(req,res){
+   async store(req,res){
+    const generatorCard = createCardNumber();
+    const {name, expireDate, type,number } = req.body
 
+    const cardCreationObject = {
+        number,
+        name,
+        expireDate,
+        type,
+        user: req.id,
 
-
-        req.body.user= req.id
-        const userCard = await cardModel.create(req.body);
-
-        return res.status(201).json({userCard});
+    }
+      if (cardCreationObject.type == 'digital'){
+        cardCreationObject.number = generatorCard;
+      }
+    const digitalCard = await digitalCardModel.create(cardCreationObject);
+    res.status(201).json(JSON.parse(digitalCard));
   };
 
 
@@ -33,12 +43,17 @@ class CardControllers{
 
   //Soft delete
   async softDelete(req,res){
-    req.body.user=req.id;
-    req.body.active = false;
-    const {number} = req.body
-    const userCards = await cardModel.findOneAndUpdate(number,req.body);
+    const {id} = req.params;
+    const card = await cardModel.findById(id);
+    card.isActive = false;
+    const userCards = await cardModel.findOneAndUpdate(id,card);
     return res.status(200).json({userCards});
-  }
+  };
+
+    createCardNumber= () => {
+    return Math.floor(Math.random()*(10000-1000) + 1000 );
+};
+
 }
 
 module.exports = new CardControllers();

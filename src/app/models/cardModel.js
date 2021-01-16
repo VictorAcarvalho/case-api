@@ -24,14 +24,10 @@ const CardSchema = mongoose.Schema({
       ref:'User',
       required:true,
     },
-    active:{
+    isActive:{
       type:Boolean,
       default:true
     },
-    cards:[{
-      type:mongoose.Schema.Types.ObjectId,
-      ref:'digitalCards'
-    }]
 },{timestamps:true});
 
 

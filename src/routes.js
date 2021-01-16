@@ -1,7 +1,6 @@
 const userControllers = require('./app/controllers/userControllers');
 const cardControllers = require('./app/controllers/cardControllers');
 const operationControllers = require('./app/controllers/operationController');
-const digitalCardControllers = require('./app/controllers/digitalControllers');
 const JWT = require('./app/middleware/auth');
 const routes = require('express').Router();
     //Endpoints Usuário
@@ -18,30 +17,16 @@ const routes = require('express').Router();
                                //Endpoints do cartão físico
 
     //cadastrar cartão
-    routes.post('/card',cardControllers.storeCard);
+    routes.post('/card',cardControllers.store);
 
-    //Lista os cartões
+    //Lista os cartões físicos
     routes.get('/card',cardControllers.list);
 
-    //Atualiza o  cartão
-    routes.put('/card/:id',cardControllers.update);
+    //Atualiza o  cartão físico
+    routes.put('/card',cardControllers.update);
 
     //Soft delete
-    routes.put('/cardDelete/:id',cardControllers.softDelete);
-
-                               //Endpoints catão digital
-
-    //cadastrar catão digital
-    routes.post('/digitalcard',digitalCardControllers.store);
-
-    //listar todos os cartões digitais
-    routes.get('/digitalcard',digitalCardControllers.list);
-
-    //Atualizar um cartão digital
-    routes.put('/digitalcard',digitalCardControllers.update);
-
-    //Soft delete
-    routes.put('/digitalcard',digitalCardControllers.softDelete);
+    routes.put('/card/:id',cardControllers.softDelete);
 
 
                                 //Endpoints das transações
