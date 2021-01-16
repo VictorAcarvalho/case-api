@@ -7,13 +7,7 @@ const routes = require('express').Router();
 
     //cadastra usuário
     routes.post('/user',userControllers.store);
-<<<<<<< HEAD
 
-=======
-    
-    //buscar usuários
-    routes.get('/user',userControllers.index);
->>>>>>> 47372fa20813b95478f14234a2173c8c61e5c4ae
     //autentifica o login do usuário
     routes.post('/login',userControllers.auth);
     //json web token
