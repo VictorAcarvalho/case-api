@@ -10,6 +10,8 @@ const routes = require('express').Router();
 
     //autentifica o login do usuário
     routes.post('/login',userControllers.auth);
+    //Atualiza o saldo
+    routes.put('/user',userControllers.storeBalance);
     //json web token
     routes.use(JWT);
 

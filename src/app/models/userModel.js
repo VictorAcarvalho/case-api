@@ -20,6 +20,7 @@ const userSchema = mongoose.Schema(
    },
   balance:{
     type:Float,
+    defaault: 0.0
   }
 
 },{timestamps:true});

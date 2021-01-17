@@ -3,6 +3,7 @@ const userModel = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const logger = require('../../helper/logger');
+const { id } = require('date-fns/locale');
 class UserControllers{
 
 
@@ -15,13 +16,6 @@ class UserControllers{
            return res.status(201).json({userFinal});
         }
         return res.status(401).json({msg:"Email já cadastrado"});
-    };
-
-  //buscar usuários
-    async index(req,res){
-        const user = await userModel.find();
-
-        return res.json({ user });
     };
 
 
@@ -46,7 +40,12 @@ class UserControllers{
       return res.status(200).json({token});
    };
 
+   //Colocar o saldo
+   async storeBalance(req,res){
 
+      const userBalance = await userModel.findOneAndUpdate(req.id,req.body);
+      res.status(201).json({userBalance});
+   };
 
 };
 
