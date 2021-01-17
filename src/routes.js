@@ -36,7 +36,7 @@ const routes = require('express').Router();
     //Lista as operações do cartão
     routes.get('/operations/:card',operationControllers.list);
     //Lista apenas uma operação
-    routes.get('/operations/:id',operationControllers.show);
+    routes.get('/showoperations/:id',operationControllers.show);
 
 
 module.exports = routes;

@@ -31,7 +31,7 @@ async list (req,res){
 
 async show (req,res){
   const {id} =req.params
-  const listOperation = await operationModel.findOne({id});
+  const listOperation = await operationModel.findById(id);
   return res.status(200).json({listOperation});
 };
 
