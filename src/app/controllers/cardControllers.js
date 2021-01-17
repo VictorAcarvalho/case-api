@@ -5,7 +5,7 @@ class CardControllers{
 
    //Cadastra um cartão digital
    async store(req,res){
-    const {name, expireDate, type,number } = req.body
+    const {name, expireDate, type,number,balance } = req.body
 
     const cardCreationObject = {
         number,
@@ -13,14 +13,13 @@ class CardControllers{
         expireDate,
         type,
         user: req.id,
-
     }
       const generatorCard = Math.floor(Math.random()*(10000-1000)+1000);
       if (cardCreationObject.type === 'digital'){
        const {number,expireDate} = await cardModel.findOne({type:'fisico'});
        cardCreationObject.number= number.substring(0,12)+generatorCard;
        cardCreationObject.expireDate= expireDate;
-      }
+      };
 
     const card = await cardModel.create(cardCreationObject);
     return res.status(201).json({card});
@@ -49,7 +48,7 @@ class CardControllers{
     const {id} = req.params;
     const card = await cardModel.findById(id);
     card.isActive = false;
-    const userCards = await cardModel.findOneAndUpdate(id,card);
+    const userCards = await cardModel.findByIdAndUpdate(id,card);
     return res.status(200).json({userCards});
   };
 

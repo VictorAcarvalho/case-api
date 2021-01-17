@@ -1,5 +1,5 @@
 const operationModel = require('../models/operationsModel');
-const cardModel = require('../models/cardModel.js');
+const userModel = require('../models/userModel');
 const {format} = require ('date-fns')
 class OperationControllers {
 
@@ -14,7 +14,11 @@ class OperationControllers {
         type,
         establishment,
         hour: format(new Date(),'dd-MM-yyyy'),
-    }
+      }
+      const {balance} = await userModel.findById(req.id);
+      if(type === 'debit'){
+         operatorObject.value - balance;
+      }
     const createOperation = await operationModel.create(operatorObject);
     return res.status(201).json({createOperation});
 };

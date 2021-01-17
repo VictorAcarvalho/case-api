@@ -1,4 +1,5 @@
 const mongoose = require('../../config/db');
+const Float = require('mongoose-float').loadType(mongoose);
 const bcrypt = require('bcryptjs');
 
 const userSchema = mongoose.Schema(
@@ -16,8 +17,10 @@ const userSchema = mongoose.Schema(
     type:String,
     required: true,
     select:false
-   }
-
+   },
+  balance:{
+    type:Float,
+  }
 
 },{timestamps:true});
 

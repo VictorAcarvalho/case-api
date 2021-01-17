@@ -23,10 +23,10 @@ const routes = require('express').Router();
     routes.get('/card',cardControllers.list);
 
     //Atualiza o  cartão
-    routes.put('/card',cardControllers.update);
+    routes.put('/card/:id',cardControllers.update);
 
     //Soft delete
-    routes.put('/card/:id',cardControllers.softDelete);
+    routes.put('/delete/:id',cardControllers.softDelete);
 
 
                                 //Endpoints das transações
