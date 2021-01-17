@@ -15,7 +15,7 @@ class OperationControllers {
         establishment,
         hour: format(new Date(),'dd-MM-yyyy'),
     }
-    const createOperation = await operationModel.create({operatorObject});
+    const createOperation = await operationModel.create(operatorObject);
     return res.status(201).json({createOperation});
 };
 
