@@ -12,6 +12,8 @@ const routes = require('express').Router();
     routes.post('/login',userControllers.auth);
     //Atualiza o saldo
     routes.put('/user',userControllers.storeBalance);
+    //Mostra o saldo
+    routes.get('/balance',userControllers.showBalance);
     //json web token
     routes.use(JWT);
 

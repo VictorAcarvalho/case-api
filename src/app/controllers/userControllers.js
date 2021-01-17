@@ -46,7 +46,12 @@ class UserControllers{
       const userBalance = await userModel.findOneAndUpdate(req.id,req.body);
       res.status(201).json({userBalance});
    };
-
+   //Mostra o saldo
+   async showBalance(req,res){
+     const listBalance = await userModel.findOne(req.id);
+     const {balance}= listBalance;
+     res.status(200).json({balance});
+   }
 };
 
 module.exports= new UserControllers();

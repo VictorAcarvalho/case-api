@@ -9,15 +9,18 @@ class OperationControllers {
     const {value,type,establishment} =req.body
     const operatorObject ={
         card,
-        date: format(new Date(),'HH:mm'),
+        date: format(new Date(),'dd-MM-yyyy'),
         value,
         type,
         establishment,
-        hour: format(new Date(),'dd-MM-yyyy'),
+        hour: format(new Date(),'HH:mm'),
       }
-      const {balance} = await userModel.findById(req.id);
+      const userBalance = await userModel.findById(req.id);
+      const{balance} = userBalance;
       if(type === 'debit'){
-         operatorObject.value - balance;
+         const transation= balance - operatorObject.value;
+         req.body.balance = transation;
+         await userModel.findByIdAndUpdate(req.id,req.body);
       }
     const createOperation = await operationModel.create(operatorObject);
     return res.status(201).json({createOperation});
