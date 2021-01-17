@@ -4,39 +4,28 @@ const {format} = require ('date-fns')
 class OperationControllers {
 
   async store(req,res){
-    const {id} = req.params;
-    const cardId = await cardModel.findById(id);
 
-    if(!cardId){
-      return res.status(401).json({error:'Cartão não encontrado '});
-    };
-    const {id} = cardId;
+    const {card} = req.params
     const {value,type,establishment} =req.body
     const operatorObject ={
-        card:id,
+        card,
         date: format(new Date(),'HH:mm'),
         value,
         type,
         establishment,
         hour: format(new Date(),'dd-MM-yyyy'),
-
     }
-    const createOperation = await operationModel.create(operatorObject);
+    const createOperation = await operationModel.create({operatorObject});
     return res.status(201).json({createOperation});
 };
 
+
+//Lista as transações do cartão
 async list (req,res){
-    const {id} = req.params;
-   const cardId = await cardModel.findById(id);
 
-  if(!cardId){
-    return res.status(401).json({error:'Cartão não encontrado '});
-  };
+  const {card} = req.params;
 
-
-  const {id} = cardId;
-
-  const listOperation = await operationModel.find({id});
+  const listOperation = await operationModel.find({card});
   return res.status(200).json({listOperation});
 };
 
