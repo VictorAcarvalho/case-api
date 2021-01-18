@@ -1,4 +1,5 @@
 const cardModel = require('../models/cardModel');
+const mongoose = require('mongoose');
 const opertaionModel = require('../models/operationsModel');
 class CardControllers{
 
@@ -54,15 +55,15 @@ class CardControllers{
   };
 
   //Lista apenas um único cartão
-  async show(req,res){
+  async showCardandTransition(req,res){
     const{id}= req.params;
-    const card = await cardModel.findById(id);
-    const listOperation = await opertaionModel.find(card).populate('Cards');
-    const lastOperation = [...listOperation].pop();
-    return res.status(200).json({card,lastOperation});
+    const cardOp = await cardModel.findById(id);
+    const listOperation = await operationModel.find({card:id}).sort({ createdAt: -1 }).limit(1);
+    console.log(listOperation)
+    return res.status(200).json({cardOp,listOperation});
   }
 
 
-}
+};
 
 module.exports = new CardControllers();

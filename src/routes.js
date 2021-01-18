@@ -32,7 +32,7 @@ const routes = require('express').Router();
     routes.get('/card',cardControllers.list);
 
     //Lista um unico cartão
-    routes.get('/card/:id',cardControllers.show);
+    routes.get('/card/:id',cardControllers.showCardandTransition);
 
     //Atualiza o  cartão
     routes.put('/card/:id',cardControllers.update);
