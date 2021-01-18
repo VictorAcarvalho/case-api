@@ -8,10 +8,23 @@ const userSchema = mongoose.Schema(
        type:String,
        required: true
    },
-   email:{
+    cpf:{
+      type:Number,
+      required:true,
+      unique:true
+    }
+   ,email:{
     type:String,
     required: true,
     unique:true
+   },
+   endereço:{
+      type:String,
+      required:true
+   },
+   cep:{
+     type:Number,
+     required:true
    },
    password:{
     type:String,
