@@ -52,67 +52,71 @@ Você pode configurar a sua porta utilizando a variavel ambiente PORT=
 ###### Cadastro de usuário
 
 ```
-POST '/user'
+POST '/user' STATUS :201
 ```
 ###### Login de usuário
 
 ```
-POST '/login'
+POST '/login'  STATUS :200
 ```
 ###### Atualiza o saldo
 
 ```
-PUT '/userbalance'
+PUT '/userbalance' STATUS :201
 ```
 
 ###### Mostrar o saldo
 ```
-GET '/balance'
+GET '/balance' STATUS :200
 ```
 
 ###### Cadastrar Cartão
 
 ```
-POST '/card'
+POST '/card'  STATUS :201
 ```
 
 ###### Listar Cartão
 
 ```
-GET '/card'
+GET '/card'   STATUS :200
 ```
 
 ###### Listar um único cartão
 
 ```
-GET '/card/:id'
+GET '/card/:id'  STATUS :200
+```
+###### Listar um único cartão e mostra sua última transação
+```
+GET '/cardlast/:id' STATUS :200
 ```
 
 ###### Atualiza um único cartão
 
 ```
-PUT '/card/:id'
+PUT '/card/:id' STATUS :200
 ```
 
 ###### Faz o delete do cartão
 
 ```
-PUT '/delete/:id'
+PUT '/delete/:id'   STATUS :200
 ```
 
 ###### Faz uma transação
 
 ```
-POST '/operations/:card'
+POST '/operations/:card'  STATUS :201
 ```
 
 ###### Lista as transações do cartão
 
 ```
-GET '/operations/:card'
+GET '/operations/:card' STATUS :200
 ```
 ##### Lista uma única transação
 
 ```
-GET '/operations/:id'
+GET '/operations/:id'   STATUS :200
 ```

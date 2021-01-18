@@ -31,8 +31,11 @@ const routes = require('express').Router();
     //Lista os cartões
     routes.get('/card',cardControllers.list);
 
-    //Lista um unico cartão
-    routes.get('/card/:id',cardControllers.showCardandTransition);
+    //Lista um único cartão
+    routes.get('/card/:id',cardControllers.show)
+
+    //Lista um unico cartão e a ultima transação
+    routes.get('/cardlast/:id',cardControllers.showCardandTransition);
 
     //Atualiza o  cartão
     routes.put('/card/:id',cardControllers.update);
