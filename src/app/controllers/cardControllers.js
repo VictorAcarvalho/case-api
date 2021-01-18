@@ -57,7 +57,7 @@ class CardControllers{
   async show(req,res){
     const{id}= req.params;
     const card = await cardModel.findById(id);
-    const listOperation = await opertaionModel.find(card);
+    const listOperation = await opertaionModel.find(card).populate('Cards');
     const lastOperation = [...listOperation].pop();
     return res.status(200).json({card,lastOperation});
   }
