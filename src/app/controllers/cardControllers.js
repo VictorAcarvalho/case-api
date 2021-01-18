@@ -1,4 +1,5 @@
 const cardModel = require('../models/cardModel');
+const opertaionModel = require('../models/operationsModel');
 class CardControllers{
 
 
@@ -29,8 +30,8 @@ class CardControllers{
 
    //Lista todos os cartões do usuário
     async list(req,res){
-
         const userCards = await cardModel.find({user:req.id,isActive:true}).populate('users');
+
         return res.status(200).json({userCards});
       };
 

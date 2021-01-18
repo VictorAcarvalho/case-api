@@ -20,7 +20,7 @@ const operationSchema = mongoose.Schema({
   },
   establishment:{
     type:String,
-    required:true
+
   },
   hour:{
     type:String,

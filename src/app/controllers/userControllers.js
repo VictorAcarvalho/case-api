@@ -43,7 +43,7 @@ class UserControllers{
    //Colocar o saldo
    async storeBalance(req,res){
 
-      const userBalance = await userModel.findOneAndUpdate(req.id,req.body);
+      const userBalance = await userModel.findOneAndUpdate(req.id,req.body,{new:true});
       res.status(201).json({userBalance});
    };
    //Mostra o saldo
