@@ -10,12 +10,12 @@ const routes = require('express').Router();
 
     //autentifica o login do usuário
     routes.post('/login',userControllers.auth);
+    //json web token
+    routes.use(JWT);
     //Atualiza o saldo
     routes.put('/user',userControllers.storeBalance);
     //Mostra o saldo
     routes.get('/balance',userControllers.showBalance);
-    //json web token
-    routes.use(JWT);
 
 
                                //Endpoints do cartão físico
@@ -25,6 +25,9 @@ const routes = require('express').Router();
 
     //Lista os cartões
     routes.get('/card',cardControllers.list);
+
+    //Lista um unico cartão
+    routes.get('/card/:id',cardControllers.show);
 
     //Atualiza o  cartão
     routes.put('/card/:id',cardControllers.update);

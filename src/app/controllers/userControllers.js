@@ -48,7 +48,8 @@ class UserControllers{
    };
    //Mostra o saldo
    async showBalance(req,res){
-     const listBalance = await userModel.findOne(req.id);
+
+     const listBalance = await userModel.findById(req.id);
      const {balance}= listBalance;
      res.status(200).json({balance});
    }

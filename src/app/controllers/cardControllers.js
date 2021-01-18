@@ -53,7 +53,14 @@ class CardControllers{
     return res.status(200).json({userCards});
   };
 
-
+  //Lista apenas um único cartão
+  async show(req,res){
+    const{id}= req.params;
+    const card = await cardModel.findById(id);
+    const listOperation = await opertaionModel.find(card);
+    const lastOperation = [...listOperation].pop();
+    return res.status(200).json({card,lastOperation});
+  }
 
 
 }
