@@ -3,17 +3,22 @@ const cardControllers = require('./app/controllers/cardControllers');
 const operationControllers = require('./app/controllers/operationController');
 const JWT = require('./app/middleware/auth');
 const routes = require('express').Router();
-                                //Endpoints Usuário
+
+
+                                    //Endpoints Usuário
 
     //cadastra usuário
     routes.post('/user',userControllers.store);
 
     //autentifica o login do usuário
     routes.post('/login',userControllers.auth);
+
     //json web token
     routes.use(JWT);
+
     //Atualiza o saldo
-    routes.put('/user',userControllers.storeBalance);
+    routes.put('/userbalance',userControllers.storeBalance);
+
     //Mostra o saldo
     routes.get('/balance',userControllers.showBalance);
 
