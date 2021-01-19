@@ -3,6 +3,7 @@ const yup = require('yup');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const logger = require('../../helper/logger');
+const { error } = require('../../helper/logger');
 class UserControllers{
 
 
@@ -59,7 +60,7 @@ class UserControllers{
    //Colocar o saldo
    async storeBalance(req,res){
 
-      const userBalance = await userModel.findOneAndUpdate(req.id,req.body,{new:true});
+      const userBalance = await userModel.findByIdAndUpdate(req.id,req.body,{new:true});
       res.status(201).json({userBalance});
    };
    //Mostra o saldo
@@ -67,6 +68,7 @@ class UserControllers{
 
      const listBalance = await userModel.findById(req.id);
      const {balance}= listBalance;
+
      res.status(200).json({balance});
    };
 
