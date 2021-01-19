@@ -1,9 +1,21 @@
 const operationModel = require('../models/operationsModel');
 const userModel = require('../models/userModel');
+const yup = require('yup');
 const {format} = require ('date-fns')
+
 class OperationControllers {
 
   async store(req,res){
+
+    const operationMask = yup.object().shape({
+      value:yup.number().integer().required(),
+      type:yup.string().required(),
+      stablishment:yup.string().required()
+    });
+    const operatioValidation = operationMask.isValid(req.body);
+    if(!operatioValidation){
+      return res.status(400).json({error:'Dados inválidos'})
+    }
 
     const {card} = req.params
     const {value,type,establishment} =req.body

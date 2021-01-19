@@ -3,8 +3,7 @@ const CardSchema = mongoose.Schema({
     number:{
         type:String,
         unique:true
-
-    },
+      },
     name:{
         type:String,
         required:true

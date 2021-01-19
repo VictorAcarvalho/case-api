@@ -1,6 +1,8 @@
 const cardModel = require('../models/cardModel');
 const mongoose = require('mongoose');
+const yup = require('yup');
 const operationModel = require('../models/operationsModel');
+const { min, isValid } = require('date-fns');
 class CardControllers{
 
 
@@ -9,6 +11,18 @@ class CardControllers{
    async store(req,res){
     const {name, expireDate, type,number,balance } = req.body
 
+    const cardMask = yup.object().shape({
+      number:yup.string().min(16).max(16).required(),
+      name:yup.string().required(),
+      expireDate:yup.string().min(5).max(5).required(),
+      type:yup.string().required()
+    });
+
+    const validateCard = await cardMask.isValid(req.body,{strict:true});
+    if(!validateCard){
+      return res.status(400).json({error:'Dados não compatíveis'});
+    }
+
     const cardCreationObject = {
         number,
         name,
@@ -16,6 +30,8 @@ class CardControllers{
         type,
         user: req.id,
     }
+
+
       const generatorCard = Math.floor(Math.random()*(10000-1000)+1000);
       if (cardCreationObject.type === 'digital'){
        const {number,expireDate} = await cardModel.findOne({type:'fisico'});

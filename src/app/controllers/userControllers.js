@@ -1,21 +1,37 @@
 const userModel = require('../models/userModel');
-
+const yup = require('yup');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const logger = require('../../helper/logger');
-const { id } = require('date-fns/locale');
 class UserControllers{
 
 
   //cadastra usuário
     async store(req,res){
+      //Camada de validação
+      const userMask = yup.object().shape({
+        name:yup.string().required(),
+        cpf:yup.number().required(),
+        email:yup.string().required(),
+        adress:yup.string().required(),
+        cep:yup.number().required(),
+        password: yup.string().required()
+      });
+
+      const userValidate = await userMask.isValid(req.body,{strict:true});
+      if(!userValidate){
+      return  res.status(400).json({error:'Dados não autorizados'})
+      }
+
+
         const {email} = req.body
         const user = await userModel.findOne({email});
         if(!user){
            const userFinal = await userModel.create(req.body);
            return res.status(201).json({userFinal});
         }
-        return res.status(401).json({msg:"Email já cadastrado"});
+
+         return res.status(401).json({msg:"Email já cadastrado"});
     };
 
 
@@ -52,7 +68,9 @@ class UserControllers{
      const listBalance = await userModel.findById(req.id);
      const {balance}= listBalance;
      res.status(200).json({balance});
-   }
+   };
+
+
 };
 
 module.exports= new UserControllers();
