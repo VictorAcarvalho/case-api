@@ -1,8 +1,10 @@
 const operationModel = require('../models/operationsModel');
 const userModel = require('../models/userModel');
+const cardModel = require('../models/cardModel');
 const mongoose = require('mongoose');
 const yup = require('yup');
-const {format} = require ('date-fns')
+const {format} = require ('date-fns');
+const { findOne } = require('../models/cardModel');
 
 class OperationControllers {
 
@@ -18,8 +20,9 @@ class OperationControllers {
       return res.status(400).json({error:'Dados inválidos'})
     }
 
-    const {card} = req.params
-    const {value,type,establishment} =req.body
+
+    const {value,type,establishment,card} =req.body;
+
     const operatorObject ={
         card,
         date: format(new Date(),'dd-MM-yyyy'),
@@ -28,6 +31,10 @@ class OperationControllers {
         establishment,
         hour: format(new Date(),'HH:mm'),
         user:req.id
+      }
+      const findCard = await cardModel.findOne({number:card});
+      if(!findCard){
+        return res.statu(400).json({error:'cartão não encontrado'});
       }
       const userBalance = await userModel.findById(req.id);
       const{balance} = userBalance;

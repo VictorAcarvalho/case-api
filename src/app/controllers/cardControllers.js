@@ -2,6 +2,7 @@ const cardModel = require('../models/cardModel');
 const operationModel = require('../models/operationsModel');
 const mongoose = require('mongoose')
 const { min, isValid } = require('date-fns');
+const { distinct } = require('../models/cardModel');
 class CardControllers{
 
 
@@ -17,6 +18,7 @@ class CardControllers{
         expireDate,
         type,
         user: req.id,
+
     }
 
 
@@ -36,10 +38,10 @@ class CardControllers{
 
    //Lista todos os cartões do usuário
     async list(req,res){
-        const userCards = await cardModel.find({user:req.id,isActive:true}).populate('users');
-        const lastOperationDate = await operationModel.find({user:req.id}).sort({ createdAt: -1}).limit(1).populate('Cards');
-        console.log(lastOperationDate);
-        return res.status(200).json({userCards,lastOperationDate});
+
+        const userCard = await cardModel.find({user:req.id,isActive:true});
+
+        return res.status(200).json(userCard);
       };
 
 

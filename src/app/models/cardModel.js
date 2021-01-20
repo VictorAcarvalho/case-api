@@ -26,6 +26,10 @@ const CardSchema = mongoose.Schema({
       type:Boolean,
       default:true
     },
+    lastOperation:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'Operations'
+    }
 },{timestamps:true});
 
 
