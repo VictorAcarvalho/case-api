@@ -4,11 +4,11 @@ const Youch = require('youch');
 const logger = require('./helper/logger');
 const morgan = require('morgan');
 const routes = require('./routes.js');
-const cors = require('cors');
+const helmet = require('helmet');
 const app = express();
-app.use(cors());
 app.use(morgan('tiny'));
 app.use(express.json());
+app.use(helmet());
 app.use(routes);
 app.use(async (error, req, res) => {
   if (error) {

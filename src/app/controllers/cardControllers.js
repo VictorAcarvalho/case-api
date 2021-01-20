@@ -22,6 +22,7 @@ class CardControllers{
       const generatorCard = Math.floor(Math.random()*(10000-1000)+1000);
       if (cardCreationObject.type === 'digital'){
        const {number,expireDate} = await cardModel.findOne({user:req.id,type:'fisico'});
+
        cardCreationObject.number= number.substring(0,12)+generatorCard;
        cardCreationObject.expireDate= expireDate;
       };
