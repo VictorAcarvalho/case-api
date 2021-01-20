@@ -52,6 +52,8 @@ const routes = require('express').Router();
     routes.get('/operations/:card',operationControllers.list);
     //Lista apenas uma operação
     routes.get('/showoperations/:id',operationControllers.show);
+    //Lista a ultima operação
+    routes.get('/last',operationControllers.showLastOperation);
 
 
 module.exports = routes;

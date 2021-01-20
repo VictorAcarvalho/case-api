@@ -1,5 +1,6 @@
 const operationModel = require('../models/operationsModel');
 const userModel = require('../models/userModel');
+const mongoose = require('mongoose');
 const yup = require('yup');
 const {format} = require ('date-fns')
 
@@ -26,6 +27,7 @@ class OperationControllers {
         type,
         establishment,
         hour: format(new Date(),'HH:mm'),
+        user:req.id
       }
       const userBalance = await userModel.findById(req.id);
       const{balance} = userBalance;
@@ -49,10 +51,20 @@ async list (req,res){
 };
 
 async show (req,res){
-  const {id} =req.params
+  const {id} =req.params;
   const listOperation = await operationModel.findById(id);
   return res.status(200).json({listOperation});
 };
+
+//Lista a ultima transação
+
+async showLastOperation(req,res){
+
+  const lastOperation = await operationModel.find({user:req.id}).sort({createdAt: -1 }).limit(1);
+  return res.status(200).json({lastOperation});
+
+}
+
 
 };
 
