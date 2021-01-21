@@ -2,8 +2,8 @@ const mongoose = require('../../config/db');
 const Float = require('mongoose-float').loadType(mongoose);
 const operationSchema = mongoose.Schema({
   card:{
-      type:mongoose.Schema.Types.ObjectId,
-      ref:'Cards',
+      type:String,
+
       required:true
   },
   date:{
@@ -25,6 +25,9 @@ const operationSchema = mongoose.Schema({
   hour:{
     type:String,
     required:true
+  },
+  bank:{
+    type:String
   },
   user:{
     type:mongoose.Types.ObjectId,
