@@ -32,12 +32,7 @@ const userSchema = mongoose.Schema(
    },
   balance:{
     type:Float,
-<<<<<<< HEAD
     default: 0.0,
-    required:true
-=======
-    default: 0.0
->>>>>>> 8a0143b718280a0578d8c26bfbe1f903a3210def
   }
 
 },{timestamps:true});
