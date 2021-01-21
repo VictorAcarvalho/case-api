@@ -46,8 +46,8 @@ const routes = require('express').Router();
 
                                 //Endpoints das transações
 
-    //Cria uma nova operação passando o id do cartão como parametro
-    routes.post('/operations/:card',operationControllers.store);
+    //Cria uma nova operação
+    routes.post('/operations',operationControllers.store);
     //Lista as operações do cartão
     routes.get('/operations/:card',operationControllers.list);
     //Lista apenas uma operação

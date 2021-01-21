@@ -9,7 +9,7 @@ class CardControllers{
 
    //Cadastra um cartão digital
    async store(req,res){
-    const {name, expireDate, type,number,balance } = req.body
+    const {name, expireDate, type,number} = req.body
 
 
     const cardCreationObject = {
