@@ -49,7 +49,7 @@ const routes = require('express').Router();
     //Cria uma nova operação
     routes.post('/operations',operationControllers.store);
     //Lista as operações do cartão
-    routes.get('/operations/:card',operationControllers.list);
+    routes.get('/operations',operationControllers.list);
     //Lista apenas uma operação
     routes.get('/showoperations/:id',operationControllers.show);
     //Lista a ultima operação

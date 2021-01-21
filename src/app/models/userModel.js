@@ -20,7 +20,6 @@ const userSchema = mongoose.Schema(
    },
    adress:{
       type:String,
-      required:true
    },
    cep:{
      type:Number,
@@ -33,7 +32,7 @@ const userSchema = mongoose.Schema(
    },
   balance:{
     type:Float,
-    defaault: 0.0
+    default: 0.0
   }
 
 },{timestamps:true});
