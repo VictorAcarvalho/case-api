@@ -22,10 +22,9 @@ class OperationControllers {
 
 
     const {value,type,establishment,card} =req.body;
-
     const findCard = await cardModel.findOne({number:card});
     if(!findCard){
-      return res.statu(400).json({error:'cartão não encontrado'});
+      return res.status(400).json({error:'cartão não encontrado'});
     }
     const {id} = findCard;
     const operatorObject ={
@@ -53,7 +52,7 @@ class OperationControllers {
 
 //Lista as transações do cartão
 async list (req,res){
-   const listOperation = await operationModel.find({user:req.id}).populate('cards');
+   const listOperation = await operationModel.find({user:req.id}).sort({createdAt: -1});
   return res.status(200).json({listOperation});
 };
 

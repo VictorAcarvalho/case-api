@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const { min, isValid } = require('date-fns');
 const { distinct } = require('../models/cardModel');
 const { JsonWebTokenError } = require('jsonwebtoken');
+const { id } = require('date-fns/locale');
 class CardControllers{
 
 
@@ -27,10 +28,10 @@ class CardControllers{
       if (cardCreationObject.type === 'digital'){
        const {number,expireDate} = await cardModel.findOne({user:req.id,type:'fisico'});
 
-       cardCreationObject.number= number.substring(0,12)+generatorCard;
+       cardCreationObject.number= number.substring(-4)+generatorCard;
        cardCreationObject.expireDate= expireDate;
       };
-
+      cardCreationObject.number =number.substring(-4);
     const card = await cardModel.create(cardCreationObject);
     return res.status(201).json({card});
   };
@@ -39,10 +40,17 @@ class CardControllers{
 
    //Lista todos os cartões do usuário
     async list(req,res){
-
-
         const userCards = await cardModel.find({user:req.id});
-        return res.status(200).json({userCards});
+        const filteredID= [...new Set(userCards.map((o)=> o._id))];
+        function findOp(i){
+          const filteredFor = Promise.all( [ operationModel.find({user:req.id,card:i}).sort({createdAt:-1}).limit(1)]);
+
+        }
+       const result= filteredID.forEach(findOp);
+
+        console.log(result);
+
+        return res.status(200).json(filteredID);
 
       };
 
