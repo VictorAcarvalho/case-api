@@ -39,20 +39,16 @@ class CardControllers{
 
 
    //Lista todos os cartões do usuário
-    async list(req,res){
-        const userCards = await cardModel.find({user:req.id});
-        const filteredID= [...new Set(userCards.map((o)=> o._id))];
-        function findOp(i){
-          const filteredFor = Promise.all( [ operationModel.find({user:req.id,card:i}).sort({createdAt:-1}).limit(1)]);
 
-        }
-       const result= filteredID.forEach(findOp);
+    async list(req, res) {
 
-        console.log(result);
+      const userCard = await cardModel.find({user:req.id});
+      return res.status(200).json(userCard);
+    };
 
-        return res.status(200).json(filteredID);
 
-      };
+
+
 
 
   // Atualiza dados do cartão
