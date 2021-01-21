@@ -46,6 +46,7 @@ class OperationControllers {
          await userModel.findByIdAndUpdate(req.id,req.body);
       }
     const createOperation = await operationModel.create(operatorObject);
+    const lastOperation = await cardModel.findOneAndUpdate({number:card},{lastOperation:createOperation});
     return res.status(201).json({createOperation});
 };
 

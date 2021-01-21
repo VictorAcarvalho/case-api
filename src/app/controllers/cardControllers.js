@@ -42,7 +42,7 @@ class CardControllers{
 
     async list(req, res) {
 
-      const userCard = await cardModel.find({user:req.id});
+      const userCard = await cardModel.find({user:req.id}).populate('lastOperation');
       return res.status(200).json(userCard);
     };
 
