@@ -6,6 +6,10 @@ const operationSchema = mongoose.Schema({
 
       required:true
   },
+  cardId:{
+    type:mongoose.Types.ObjectId,
+    ref: 'Cards'
+  },
   date:{
     type:String,
     required:true

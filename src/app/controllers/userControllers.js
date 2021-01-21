@@ -25,6 +25,7 @@ class UserControllers{
       // }
 
 
+
         const {email} = req.body
         const user = await userModel.findOne({email});
         if(!user){

@@ -23,8 +23,14 @@ class OperationControllers {
 
     const {value,type,establishment,card} =req.body;
 
+    const findCard = await cardModel.findOne({number:card});
+    if(!findCard){
+      return res.statu(400).json({error:'cartão não encontrado'});
+    }
+    const {id} = findCard;
     const operatorObject ={
-        card,
+        card:id,
+        cardId: id,
         date: format(new Date(),'dd-MM-yyyy'),
         value,
         type,
@@ -32,10 +38,7 @@ class OperationControllers {
         hour: format(new Date(),'HH:mm'),
         user:req.id
       }
-      const findCard = await cardModel.findOne({number:card});
-      if(!findCard){
-        return res.statu(400).json({error:'cartão não encontrado'});
-      }
+
       const userBalance = await userModel.findById(req.id);
       const{balance} = userBalance;
       if(type === 'debit'){
@@ -50,10 +53,7 @@ class OperationControllers {
 
 //Lista as transações do cartão
 async list (req,res){
-
-  const {card} = req.params;
-
-  const listOperation = await operationModel.find({card});
+   const listOperation = await operationModel.find({user:req.id}).populate('cards');
   return res.status(200).json({listOperation});
 };
 
