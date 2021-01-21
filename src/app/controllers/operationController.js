@@ -53,7 +53,7 @@ class OperationControllers {
 
 //Lista as transações do cartão
 async list (req,res){
-   const listOperation = await operationModel.find({user:req.id}).sort({createdAt: -1});
+   const listOperation = await operationModel.find({user:req.id}).sort({createdAt: -1}).populate('cardId');
   return res.status(200).json(listOperation);
 };
 
