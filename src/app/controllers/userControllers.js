@@ -9,20 +9,7 @@ class UserControllers{
 
   //cadastra usuário
     async store(req,res){
-      //Camada de validação
-      const userMask = yup.object().shape({
-        name:yup.string().required(),
-        cpf:yup.number().required(),
-        email:yup.string().required(),
-        adress:yup.string().required(),
-        cep:yup.number().required(),
-        password: yup.string().required()
-      });
 
-      const userValidate = await userMask.isValid(req.body,{strict:true});
-      if(!userValidate){
-      return  res.status(400).json({error:'Dados não autorizados'})
-      }
 
 
         const {email} = req.body
