@@ -54,7 +54,7 @@ class OperationControllers {
 //Lista as transações do cartão
 async list (req,res){
    const listOperation = await operationModel.find({user:req.id}).sort({createdAt: -1});
-  return res.status(200).json({listOperation});
+  return res.status(200).json(listOperation);
 };
 
 async show (req,res){
