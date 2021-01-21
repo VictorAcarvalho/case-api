@@ -40,7 +40,7 @@ class OperationControllers {
 
       const userBalance = await userModel.findById(req.id);
       const{balance} = userBalance;
-      if(type === 'debit'){
+      if(type === 'debito'){
          const transation= balance - operatorObject.value;
          req.body.balance = transation;
          await userModel.findByIdAndUpdate(req.id,req.body);

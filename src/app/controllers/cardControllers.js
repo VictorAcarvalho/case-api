@@ -31,7 +31,6 @@ class CardControllers{
        cardCreationObject.number= number.substring(-4)+generatorCard;
        cardCreationObject.expireDate= expireDate;
       };
-      cardCreationObject.number =number.substring(-4);
     const card = await cardModel.create(cardCreationObject);
     return res.status(201).json({card});
   };
@@ -42,7 +41,7 @@ class CardControllers{
 
     async list(req, res) {
 
-      const userCard = await cardModel.find({user:req.id}).populate('lastOperation');
+      const userCard = await cardModel.find({user:req.id,isActive:true}).populate('lastOperation');
       return res.status(200).json(userCard);
     };
 
