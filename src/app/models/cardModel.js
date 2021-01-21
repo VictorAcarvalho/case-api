@@ -1,3 +1,4 @@
+const { number } = require('yup/lib/locale');
 const mongoose = require('../../config/db');
 const CardSchema = mongoose.Schema({
     number:{
@@ -31,7 +32,6 @@ const CardSchema = mongoose.Schema({
       ref:'Operations'
     }
 },{timestamps:true});
-
 
 const userCard = mongoose.model('Cards',CardSchema);
 module.exports= userCard;
