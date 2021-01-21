@@ -25,7 +25,7 @@ class OperationControllers {
 
     const findCard = await cardModel.findOne({number:card});
     if(!findCard){
-      return res.statu(400).json({error:'cartão não encontrado'});
+      return res.status(400).json({error:'cartão não encontrado'});
     }
     const {id} = findCard;
     const operatorObject ={
